@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divyapath — Sacred Knowledge Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #E8631A;
+    --saffron-dark: #C04E0E;
+    --saffron-light: #FFF0E6;
+    --gold: #C9901B;
+    --gold-light: #FDF4E3;
+    --maroon: #7B1F2A;
+    --cream: #FDF8F0;
+    --deep: #1A1208;
+    --text: #2C1A0E;
+    --text-muted: #7A6155;
+    --border: rgba(200,140,70,0.2);
+    --white: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(253,248,240,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 600;
+    color: var(--saffron);
+    letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo span { color: var(--maroon); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 400; color: var(--text-muted);
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+  .nav-cta {
+    display: flex; gap: 12px; align-items: center;
+  }
+  .btn-ghost {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--text); background: transparent;
+    border: 1px solid var(--border); border-radius: 40px;
+    padding: 9px 22px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--saffron); color: var(--saffron); }
+  .btn-primary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--white); background: var(--saffron);
+    border: none; border-radius: 40px;
+    padding: 10px 24px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--saffron-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 60px 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(232,99,26,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 90% 20%, rgba(201,144,27,0.1) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9901B' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .mandala-bg {
+    position: absolute; right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: 680px; height: 680px;
+    opacity: 0.07;
+    animation: spin-slow 60s linear infinite;
+  }
+  @keyframes spin-slow { to { transform: translateY(-50%) rotate(360deg); } }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 640px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--saffron-light);
+    border: 1px solid rgba(232,99,26,0.2);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 500;
+    color: var(--saffron);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow::before {
+    content: '✦'; font-size: 10px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 76px; font-weight: 600;
+    line-height: 1.05;
+    color: var(--deep);
+    margin-bottom: 24px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--saffron);
+  }
+  .hero-subtitle {
+    font-size: 17px; font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 44px;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-large {
+    font-size: 15px; padding: 14px 36px; border-radius: 50px;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px;
+    padding-top: 40px; border-top: 1px solid var(--border);
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 600;
+    color: var(--saffron);
+    display: block;
+  }
+  .stat-label {
+    font-size: 13px; color: var(--text-muted);
+    font-weight: 400; letter-spacing: 0.03em;
+  }
+  .hero-visual {
+    position: absolute; right: 60px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .phone-mockup {
+    width: 300px; height: 600px;
+    background: var(--deep);
+    border-radius: 44px;
+    border: 8px solid #2C2010;
+    box-shadow: 0 40px 80px rgba(26,18,8,0.3), 0 0 0 1px rgba(201,144,27,0.3);
+    overflow: hidden;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #1A1208 0%, #2C1A0E 40%, #1A1208 100%);
+    padding: 24px 16px 16px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .phone-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .phone-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--saffron); font-weight: 600;
+  }
+  .phone-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--saffron); display: flex; align-items: center;
+    justify-content: center; font-size: 14px;
+  }
+  .phone-banner {
+    background: linear-gradient(135deg, rgba(232,99,26,0.3), rgba(201,144,27,0.2));
+    border: 1px solid rgba(201,144,27,0.3);
+    border-radius: 16px; padding: 16px;
+    color: var(--cream);
+  }
+  .phone-banner-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 600; margin-bottom: 4px;
+  }
+  .phone-banner-sub { font-size: 11px; color: rgba(253,248,240,0.6); }
+  .phone-section-label {
+    font-size: 11px; color: rgba(253,248,240,0.4);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 500;
+  }
+  .phone-cats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .phone-cat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,144,27,0.15);
+    border-radius: 12px; padding: 12px 10px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  }
+  .phone-cat-icon { font-size: 18px; }
+  .phone-cat-name { font-size: 11px; color: rgba(253,248,240,0.7); font-weight: 500; }
+  .phone-quote {
+    background: rgba(201,144,27,0.1);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 8px 8px 0; padding: 10px 12px;
+  }
+  .phone-quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: rgba(253,248,240,0.8);
+    font-style: italic; line-height: 1.4;
+  }
+  .phone-nav {
+    display: flex; justify-content: space-around;
+    padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: auto;
+  }
+  .phone-nav-item { font-size: 10px; color: rgba(253,248,240,0.4); text-align: center; }
+  .phone-nav-item.active { color: var(--saffron); }
+  .phone-nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+
+  /* SECTION COMMON */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 11px; font-weight: 500;
+    color: var(--saffron); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::before { content: '—'; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 600;
+    line-height: 1.1; color: var(--deep);
+    margin-bottom: 16px;
+  }
+  .section-title em { color: var(--saffron); font-style: italic; }
+  .section-desc {
+    font-size: 16px; color: var(--text-muted);
+    line-height: 1.7; max-width: 520px;
+    margin-bottom: 56px;
+  }
+
+  /* CATEGORIES */
+  .categories-section { background: var(--white); }
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .cat-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 28px 20px;
+    text-align: center; cursor: pointer;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .cat-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--saffron-light), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .cat-card:hover { border-color: rgba(232,99,26,0.4); transform: translateY(-4px); }
+  .cat-card:hover::before { opacity: 1; }
+  .cat-icon {
+    font-size: 36px; margin-bottom: 14px; display: block;
+    position: relative; z-index: 1;
+  }
+  .cat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 600; color: var(--deep);
+    margin-bottom: 4px; position: relative; z-index: 1;
+  }
+  .cat-count {
+    font-size: 12px; color: var(--text-muted);
+    position: relative; z-index: 1;
+  }
+  .cat-card.featured {
+    background: var(--deep);
+    border-color: transparent;
+    grid-column: span 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .cat-card.featured .cat-name { color: var(--cream); }
+  .cat-card.featured .cat-count { color: rgba(253,248,240,0.5); }
+  .cat-card.featured::before {
+    background: linear-gradient(135deg, rgba(232,99,26,0.2), rgba(201,144,27,0.1));
+    opacity: 1;
+  }
+
+  /* FEATURES */
+  .features-section { background: var(--cream); }
+  .features-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .features-list { display: flex; flex-direction: column; gap: 24px; }
+  .feature-item {
+    display: flex; gap: 20px;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transition: all 0.3s; cursor: pointer;
+  }
+  .feature-item:hover, .feature-item.active {
+    background: var(--white);
+    border-color: var(--border);
+  }
+  .feature-item.active { border-color: rgba(232,99,26,0.3); }
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    color: rgba(232,99,26,0.2);
+    min-width: 48px; line-height: 1;
+  }
+  .feature-item.active .feature-num { color: var(--saffron); }
+  .feature-content { }
+  .feature-title {
+    font-size: 17px; font-weight: 500; color: var(--deep);
+    margin-bottom: 6px;
+  }
+  .feature-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .features-visual {
+    position: relative;
+  }
+  .features-card {
+    background: var(--deep);
+    border-radius: 24px; padding: 40px;
+    box-shadow: 0 30px 60px rgba(26,18,8,0.2);
+    position: relative; overflow: hidden;
+  }
+  .features-card::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,99,26,0.2), transparent);
+  }
+  .chatbot-msg {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px 12px 12px 4px; padding: 14px 18px;
+    margin-bottom: 12px;
+    font-size: 14px; color: rgba(253,248,240,0.8);
+    line-height: 1.5; max-width: 85%;
+    animation: fadeIn 0.5s ease;
+  }
+  .chatbot-msg.user {
+    background: rgba(232,99,26,0.25);
+    border-radius: 12px 12px 4px 12px;
+    margin-left: auto; color: var(--cream);
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .chatbot-input {
+    display: flex; gap: 10px; margin-top: 20px;
+    background: rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 14px;
+  }
+  .chatbot-input-text { flex: 1; font-size: 13px; color: rgba(253,248,240,0.4); }
+  .chatbot-send {
+    background: var(--saffron); border: none; border-radius: 8px;
+    color: white; font-size: 13px; padding: 6px 14px; cursor: pointer;
+  }
+
+  /* CONTENT TYPES */
+  .content-section { background: var(--white); }
+  .content-tabs {
+    display: flex; gap: 4px; margin-bottom: 48px;
+    background: var(--cream); border-radius: 50px; padding: 4px;
+    width: fit-content;
+  }
+  .tab-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 500;
+    padding: 10px 24px; border-radius: 40px; border: none;
+    cursor: pointer; transition: all 0.2s;
+    background: transparent; color: var(--text-muted);
+  }
+  .tab-btn.active {
+    background: var(--white);
+    color: var(--text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .content-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .content-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .content-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,18,8,0.12); }
+  .content-thumb {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; position: relative; overflow: hidden;
+  }
+  .thumb-saffron { background: linear-gradient(135deg, #FFF0E6, #FFD4A8); }
+  .thumb-gold { background: linear-gradient(135deg, #FDF4E3, #FAEAB0); }
+  .thumb-maroon { background: linear-gradient(135deg, #F5E6E8, #EDB8BE); }
+  .thumb-green { background: linear-gradient(135deg, #EAF4EF, #B8DFC9); }
+  .content-info { padding: 16px; }
+  .content-category {
+    font-size: 10px; font-weight: 600; color: var(--saffron);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .content-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 600; color: var(--deep);
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .content-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--text-muted);
+  }
+  .content-badge {
+    background: var(--saffron-light); color: var(--saffron);
+    padding: 3px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+  }
+
+  /* SUBSCRIPTION */
+  .subscription-section {
+    background: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  .subscription-section::before {
+    content: '';
+    position: absolute; top: -100px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,99,26,0.15), transparent);
+  }
+  .subscription-section::after {
+    content: '';
+    position: absolute; bottom: -80px; right: -80px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,144,27,0.12), transparent);
+  }
+  .subscription-section .section-title { color: var(--cream); }
+  .subscription-section .section-desc { color: rgba(253,248,240,0.5); }
+  .subscription-section .section-label { color: var(--gold); }
+  .plans-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; position: relative; z-index: 2;
+  }
+  .plan-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px; padding: 36px 28px;
+    position: relative; overflow: hidden;
+  }
+  .plan-card.popular {
+    background: var(--saffron);
+    border-color: transparent;
+  }
+  .plan-badge {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--gold); color: var(--deep);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .plan-name {
+    font-size: 13px; font-weight: 500;
+    color: rgba(253,248,240,0.6); letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .plan-card.popular .plan-name { color: rgba(255,255,255,0.8); }
+  .plan-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 600; color: var(--cream);
+    line-height: 1; margin-bottom: 4px;
+  }
+  .plan-price sup { font-size: 22px; vertical-align: top; margin-top: 12px; display: inline-block; }
+  .plan-price span { font-size: 16px; font-weight: 300; opacity: 0.6; }
+  .plan-desc { font-size: 13px; color: rgba(253,248,240,0.5); margin-bottom: 28px; }
+  .plan-card.popular .plan-desc { color: rgba(255,255,255,0.7); }
+  .plan-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .plan-features li {
+    font-size: 14px; color: rgba(253,248,240,0.7);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .plan-card.popular .plan-features li { color: rgba(255,255,255,0.9); }
+  .plan-features li::before { content: '✦'; font-size: 8px; color: var(--gold); flex-shrink: 0; }
+  .plan-card.popular .plan-features li::before { color: rgba(255,255,255,0.8); }
+  .plan-btn {
+    width: 100%; padding: 14px; border-radius: 50px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent; color: var(--cream);
+    transition: all 0.2s;
+  }
+  .plan-btn:hover { background: rgba(255,255,255,0.1); }
+  .plan-card.popular .plan-btn {
+    background: var(--deep); color: var(--cream); border-color: transparent;
+  }
+  .plan-card.popular .plan-btn:hover { background: var(--maroon); }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--cream); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 28px;
+    position: relative;
+  }
+  .testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 400;
+    color: var(--deep); line-height: 1.6;
+    font-style: italic; margin-bottom: 20px;
+  }
+  .testimonial-author { display: flex; gap: 12px; align-items: center; }
+  .author-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--saffron-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .author-name { font-size: 14px; font-weight: 500; color: var(--deep); }
+  .author-loc { font-size: 12px; color: var(--text-muted); }
+  .testimonial-stars { color: var(--gold); font-size: 13px; margin-bottom: 14px; }
+
+  /* LIVE */
+  .live-section { background: var(--white); }
+  .live-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }
+  .live-main {
+    background: var(--deep); border-radius: 20px; overflow: hidden;
+    position: relative;
+    min-height: 280px; display: flex; align-items: flex-end;
+  }
+  .live-main-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(26,18,8,0.2), rgba(26,18,8,0.9));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px;
+  }
+  .live-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: #E83A1A; color: white;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 4px 10px; border-radius: 4px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+  .live-main-info { padding: 20px; position: relative; z-index: 1; }
+  .live-main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600; color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .live-main-sub { font-size: 13px; color: rgba(253,248,240,0.6); }
+  .live-card {
+    background: var(--cream); border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+  }
+  .live-card-thumb {
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+  }
+  .live-card-info { padding: 16px; flex: 1; }
+  .live-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 600; color: var(--deep);
+    margin-bottom: 4px;
+  }
+  .live-card-sub { font-size: 12px; color: var(--text-muted); }
+  .live-upcoming { font-size: 11px; color: var(--saffron); font-weight: 500; margin-top: 8px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep); padding: 80px 60px 40px;
+    position: relative; overflow: hidden;
+  }
+  footer::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,144,27,0.4), transparent);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 60px;
+  }
+  .footer-brand { }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600; color: var(--saffron);
+    margin-bottom: 16px;
+  }
+  .footer-tagline { font-size: 14px; color: rgba(253,248,240,0.4); line-height: 1.6; max-width: 260px; }
+  .footer-col-title {
+    font-size: 12px; font-weight: 600; color: rgba(253,248,240,0.4);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links a {
+    font-size: 14px; color: rgba(253,248,240,0.6);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--saffron); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-copy { font-size: 13px; color: rgba(253,248,240,0.3); }
+  .footer-social { display: flex; gap: 16px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; font-size: 14px;
+    text-decoration: none; color: rgba(253,248,240,0.6);
+  }
+  .social-btn:hover { background: var(--saffron); border-color: transparent; color: white; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* DAILY QUOTE STRIP */
+  .quote-strip {
+    background: var(--saffron);
+    padding: 18px 60px;
+    overflow: hidden; position: relative;
+  }
+  .quote-ticker {
+    display: flex; gap: 80px;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .quote-ticker-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-style: italic; color: rgba(255,255,255,0.9);
+    display: flex; align-items: center; gap: 20px; flex-shrink: 0;
+  }
+  .quote-ticker-item::before { content: '✦'; font-size: 10px; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">✦ Divya<span>path</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Categories</a></li>
+    <li><a href="#">Learn</a></li>
+    <li><a href="#">Live</a></li>
+    <li><a href="#">Wellness</a></li>
+    <li><a href="#">Tourism</a></li>
+    <li><a href="#">Community</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-ghost">Log in</button>
+    <button class="btn-primary">Get Started</button>
+  </div>
+</nav>
+
+<!-- QUOTE STRIP -->
+<div class="quote-strip" style="margin-top: 72px;">
+  <div class="quote-ticker">
+    <div class="quote-ticker-item">तमसो मा ज्योतिर्गमय — Lead me from darkness to light</div>
+    <div class="quote-ticker-item">सर्वे भवन्तु सुखिनः — May all beings be happy</div>
+    <div class="quote-ticker-item">योगः कर्मसु कौशलम् — Yoga is excellence in action</div>
+    <div class="quote-ticker-item">अहम् ब्रह्मास्मि — I am the infinite reality</div>
+    <div class="quote-ticker-item">तमसो मा ज्योतिर्गमय — Lead me from darkness to light</div>
+    <div class="quote-ticker-item">सर्वे भवन्तु सुखिनः — May all beings be happy</div>
+    <div class="quote-ticker-item">योगः कर्मसु कौशलम् — Yoga is excellence in action</div>
+    <div class="quote-ticker-item">अहम् ब्रह्मास्मि — I am the infinite reality</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="mandala-bg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="240" stroke="#C9901B" stroke-width="1"/>
+    <circle cx="250" cy="250" r="200" stroke="#C9901B" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="160" stroke="#C9901B" stroke-width="1"/>
+    <circle cx="250" cy="250" r="120" stroke="#C9901B" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="80" stroke="#C9901B" stroke-width="1"/>
+    <circle cx="250" cy="250" r="40" stroke="#C9901B" stroke-width="0.5"/>
+    <line x1="250" y1="10" x2="250" y2="490" stroke="#C9901B" stroke-width="0.5"/>
+    <line x1="10" y1="250" x2="490" y2="250" stroke="#C9901B" stroke-width="0.5"/>
+    <line x1="80" y1="80" x2="420" y2="420" stroke="#C9901B" stroke-width="0.5"/>
+    <line x1="420" y1="80" x2="80" y2="420" stroke="#C9901B" stroke-width="0.5"/>
+    <polygon points="250,30 280,120 370,120 300,175 325,265 250,210 175,265 200,175 130,120 220,120" stroke="#C9901B" stroke-width="0.5" fill="none"/>
+    <polygon points="250,470 280,380 370,380 300,325 325,235 250,290 175,235 200,325 130,380 220,380" stroke="#C9901B" stroke-width="0.5" fill="none"/>
+    <circle cx="250" cy="30" r="4" fill="#C9901B"/>
+    <circle cx="250" cy="470" r="4" fill="#C9901B"/>
+    <circle cx="30" cy="250" r="4" fill="#C9901B"/>
+    <circle cx="470" cy="250" r="4" fill="#C9901B"/>
+  </svg>
+
+  <div class="hero-content fade-up visible">
+    <div class="hero-eyebrow">Sacred Knowledge Platform</div>
+    <h1 class="hero-title">
+      Your journey to<br><em>divine wisdom</em><br>begins here
+    </h1>
+    <p class="hero-subtitle">Explore Stotras, Vedas, Bhajans, Wellness, and spiritual education — all in one sacred digital sanctuary crafted for every seeker.</p>
+    <div class="hero-actions">
+      <button class="btn-primary btn-large">Begin Your Journey</button>
+      <button class="btn-ghost btn-large">▶ Watch Preview</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">50K+</span>
+        <span class="stat-label">Spiritual Seekers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">12K+</span>
+        <span class="stat-label">Sacred Texts</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Live Events</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">18+</span>
+        <span class="stat-label">Languages</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <div class="phone-header">
+          <span class="phone-logo">✦ Divyapath</span>
+          <div class="phone-avatar">🙏</div>
+        </div>
+        <div class="phone-banner">
+          <div class="phone-banner-title">Good Morning, Aryan ✦</div>
+          <div class="phone-banner-sub">Today's Darshan: Tirupati Balaji · Live Now</div>
+        </div>
+        <div class="phone-section-label">Categories</div>
+        <div class="phone-cats">
+          <div class="phone-cat"><span class="phone-cat-icon">🕉</span><span class="phone-cat-name">Stotras</span></div>
+          <div class="phone-cat"><span class="phone-cat-icon">📿</span><span class="phone-cat-name">Bhajans</span></div>
+          <div class="phone-cat"><span class="phone-cat-icon">🧘</span><span class="phone-cat-name">Wellness</span></div>
+          <div class="phone-cat"><span class="phone-cat-icon">⭐</span><span class="phone-cat-name">Astrology</span></div>
+        </div>
+        <div class="phone-section-label">Daily Shloka</div>
+        <div class="phone-quote">
+          <div class="phone-quote-text">"कर्म करो, फल की चिंता मत करो" — Do your duty without attachment to results.</div>
+        </div>
+        <div class="phone-nav">
+          <div class="phone-nav-item active"><span class="phone-nav-icon">🏠</span>Home</div>
+          <div class="phone-nav-item"><span class="phone-nav-icon">🔍</span>Explore</div>
+          <div class="phone-nav-item"><span class="phone-nav-icon">🤖</span>AI Guide</div>
+          <div class="phone-nav-item"><span class="phone-nav-icon">👤</span>Profile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories-section fade-up">
+  <div class="section-label">Explore</div>
+  <h2 class="section-title">Sacred <em>Categories</em></h2>
+  <p class="section-desc">Dive deep into ancient wisdom, modern wellness, and everything that nourishes the soul.</p>
+
+  <div class="categories-grid">
+    <div class="cat-card">
+      <span class="cat-icon">🕉</span>
+      <div class="cat-name">Stotras & Shlokas</div>
+      <div class="cat-count">3,200+ texts</div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">📖</span>
+      <div class="cat-name">Vedas & Upanishads</div>
+      <div class="cat-count">800+ chapters</div>
+    </div>
+    <div class="cat-card featured">
+      <span class="cat-icon">🎵</span>
+      <div class="cat-name">Bhajans & Aartis</div>
+      <div class="cat-count">5,000+ tracks</div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🧘</span>
+      <div class="cat-name">Wellness & Yoga</div>
+      <div class="cat-count">1,400+ sessions</div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">⭐</span>
+      <div class="cat-name">Astrology</div>
+      <div class="cat-count">Daily + Kundali</div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🏛</span>
+      <div class="cat-name">Temple Tourism</div>
+      <div class="cat-count">2,000+ temples</div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🎓</span>
+      <div class="cat-name">Spiritual Academics</div>
+      <div class="cat-count">120+ courses</div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">👧</span>
+      <div class="cat-name">Kids Learning</div>
+      <div class="cat-count">Stories & games</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT SECTION -->
+<section class="content-section fade-up">
+  <div class="section-label">Curated</div>
+  <h2 class="section-title">Trending <em>Today</em></h2>
+
+  <div class="content-tabs">
+    <button class="tab-btn active">All</button>
+    <button class="tab-btn">Audio</button>
+    <button class="tab-btn">Video</button>
+    <button class="tab-btn">Text</button>
+    <button class="tab-btn">Live</button>
+  </div>
+
+  <div class="content-grid">
+    <div class="content-card">
+      <div class="content-thumb thumb-saffron">🕉</div>
+      <div class="content-info">
+        <div class="content-category">Stotra</div>
+        <div class="content-title">Hanuman Chalisa — Complete</div>
+        <div class="content-meta">
+          <span>Audio · 12 min</span>
+          <span class="content-badge">Popular</span>
+        </div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="content-thumb thumb-gold">🎵</div>
+      <div class="content-info">
+        <div class="content-category">Bhajan</div>
+        <div class="content-title">Om Namah Shivaya — Kirtan</div>
+        <div class="content-meta">
+          <span>Audio · 8 min</span>
+          <span class="content-badge">New</span>
+        </div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="content-thumb thumb-maroon">🧘</div>
+      <div class="content-info">
+        <div class="content-category">Wellness</div>
+        <div class="content-title">Pranayama for Beginners</div>
+        <div class="content-meta">
+          <span>Video · 24 min</span>
+          <span class="content-badge">Course</span>
+        </div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="content-thumb thumb-green">📿</div>
+      <div class="content-info">
+        <div class="content-category">Vedas</div>
+        <div class="content-title">Bhagavad Gita — Chapter 2</div>
+        <div class="content-meta">
+          <span>Text + Audio</span>
+          <span class="content-badge">Featured</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section fade-up">
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+    <div>
+      <div class="section-label">Why Divyapath</div>
+      <h2 class="section-title">Built for every <em>seeker</em></h2>
+      <p class="section-desc">From curious beginners to devoted practitioners — our platform meets you where you are.</p>
+      <div class="features-list">
+        <div class="feature-item active">
+          <div class="feature-num">01</div>
+          <div class="feature-content">
+            <div class="feature-title">AI Spiritual Guide</div>
+            <div class="feature-desc">Ask any question about scriptures, rituals, wellness or astrology. Our AI responds with wisdom, compassion, and multilingual support.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-num">02</div>
+          <div class="feature-content">
+            <div class="feature-title">Personalized for Your Age & Faith</div>
+            <div class="feature-desc">Content adapts to your profile — child-safe, teen-appropriate, or full access — with preferences for your deity, language, and tradition.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-num">03</div>
+          <div class="feature-content">
+            <div class="feature-title">Live Temple Darshan</div>
+            <div class="feature-desc">Watch live puja and aarti from temples across India. Schedule reminders and participate in online prasad rituals.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-num">04</div>
+          <div class="feature-content">
+            <div class="feature-title">Offline Access</div>
+            <div class="feature-desc">Download stotras, bhajans, and PDFs for offline reading. Your spiritual practice continues without internet.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="features-visual">
+      <div class="features-card">
+        <div style="font-size:13px; color:rgba(253,248,240,0.4); margin-bottom:20px; letter-spacing:0.06em;">AI SPIRITUAL GUIDE</div>
+        <div class="chatbot-msg">
+          🙏 Namaste! How can I help your spiritual journey today?
+        </div>
+        <div class="chatbot-msg user">
+          What is the significance of chanting Om Namah Shivaya?
+        </div>
+        <div class="chatbot-msg" style="animation-delay: 0.3s;">
+          ✦ "Om Namah Shivaya" is the Panchakshara mantra — the five sacred syllables Na, Ma, Shi, Va, Ya representing the five elements: Earth, Water, Fire, Air, and Space. Chanting it purifies the mind and connects the seeker to Shiva consciousness...
+        </div>
+        <div class="chatbot-input">
+          <div class="chatbot-input-text">Ask anything about dharma, yoga, rituals...</div>
+          <button class="chatbot-send">Send ↑</button>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;">
+          <span style="background:rgba(232,99,26,0.15); color:rgba(253,248,240,0.7); font-size:11px; padding:5px 12px; border-radius:20px; cursor:pointer; border:1px solid rgba(232,99,26,0.2);">Daily horoscope</span>
+          <span style="background:rgba(232,99,26,0.15); color:rgba(253,248,240,0.7); font-size:11px; padding:5px 12px; border-radius:20px; cursor:pointer; border:1px solid rgba(232,99,26,0.2);">Temple near me</span>
+          <span style="background:rgba(232,99,26,0.15); color:rgba(253,248,240,0.7); font-size:11px; padding:5px 12px; border-radius:20px; cursor:pointer; border:1px solid rgba(232,99,26,0.2);">Yoga for beginners</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE EVENTS -->
+<section class="live-section fade-up">
+  <div class="section-label">Streaming Now</div>
+  <h2 class="section-title">Live <em>Darshan</em> & Events</h2>
+  <p class="section-desc">Be present at sacred rituals from the most revered temples, from anywhere in the world.</p>
+
+  <div class="live-grid">
+    <div class="live-main">
+      <div class="live-main-bg">🛕</div>
+      <span class="live-badge">● LIVE</span>
+      <div class="live-main-info">
+        <div class="live-main-title">Tirupati Balaji — Evening Aarti</div>
+        <div class="live-main-sub">🔴 12,450 watching now · Andhra Pradesh</div>
+      </div>
+    </div>
+    <div class="live-card">
+      <div class="live-card-thumb thumb-saffron">🕌</div>
+      <div class="live-card-info">
+        <div class="live-card-title">Kashi Vishwanath Abhishek</div>
+        <div class="live-card-sub">Varanasi · 3,200 watching</div>
+        <div class="live-upcoming">● LIVE NOW</div>
+      </div>
+    </div>
+    <div class="live-card">
+      <div class="live-card-thumb thumb-gold">🏔</div>
+      <div class="live-card-info">
+        <div class="live-card-title">Kedarnath Morning Puja</div>
+        <div class="live-card-sub">Uttarakhand · Tomorrow 5:00 AM</div>
+        <div class="live-upcoming">⏰ Upcoming · Set Reminder</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIPTION -->
+<section class="subscription-section fade-up">
+  <div style="position:relative; z-index:2;">
+    <div class="section-label">Membership</div>
+    <h2 class="section-title">Choose your <em>path</em></h2>
+    <p class="section-desc" style="margin-bottom: 56px;">Begin free, or unlock the full divine experience with a Premium membership tailored for families and devotees.</p>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-name">Seeker — Free</div>
+        <div class="plan-price"><sup>₹</sup>0<span>/mo</span></div>
+        <div class="plan-desc">Begin your spiritual journey</div>
+        <ul class="plan-features">
+          <li>Basic Stotras & Bhajans</li>
+          <li>Daily Quotes & Shloka</li>
+          <li>5 AI Chatbot Queries/day</li>
+          <li>Basic Festival Calendar</li>
+        </ul>
+        <button class="plan-btn">Start for Free</button>
+      </div>
+      <div class="plan-card popular">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">Devotee — Premium</div>
+        <div class="plan-price"><sup>₹</sup>199<span>/mo</span></div>
+        <div class="plan-desc">The complete sacred experience</div>
+        <ul class="plan-features">
+          <li>All Categories Unlocked</li>
+          <li>Unlimited AI Guidance</li>
+          <li>Live Darshan Access</li>
+          <li>Offline Downloads</li>
+          <li>Astrology & Kundali Reports</li>
+          <li>Ad-free Experience</li>
+        </ul>
+        <button class="plan-btn">Start Premium</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Family Plan</div>
+        <div class="plan-price"><sup>₹</sup>349<span>/mo</span></div>
+        <div class="plan-desc">For the entire family's spiritual growth</div>
+        <ul class="plan-features">
+          <li>Up to 6 Family Members</li>
+          <li>Kids Learning Module</li>
+          <li>Parental Controls</li>
+          <li>All Premium Features</li>
+          <li>Temple Membership Access</li>
+        </ul>
+        <button class="plan-btn">Get Family Plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section fade-up">
+  <div class="section-label">Community</div>
+  <h2 class="section-title">Voices of <em>devotion</em></h2>
+  <p class="section-desc" style="margin-bottom: 48px;">Seekers from across India and beyond have found peace, purpose, and community through Divyapath.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-quote">"The AI chatbot explained the Bhagavad Gita to me in a way I could finally understand. I've been using it every morning for my sadhana."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">🙏</div>
+        <div>
+          <div class="author-name">Priya Sharma</div>
+          <div class="author-loc">Mumbai, Maharashtra</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-quote">"My children now listen to mythological stories every night on this app. The kids section is beautifully designed and age-appropriate."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">✨</div>
+        <div>
+          <div class="author-name">Rajesh Patel</div>
+          <div class="author-loc">Ahmedabad, Gujarat</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-quote">"Being able to watch the Tirupati darshan live from my home in London was deeply moving. It truly bridges the spiritual distance."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">🕉</div>
+        <div>
+          <div class="author-name">Ananya Krishnan</div>
+          <div class="author-loc">London, UK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">✦ Divyapath</div>
+      <div class="footer-tagline">A sacred digital sanctuary for every seeker — connecting ancient wisdom to modern lives across the world.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Platform</div>
+      <ul class="footer-links">
+        <li><a href="#">Home Dashboard</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Live Events</a></li>
+        <li><a href="#">AI Chatbot</a></li>
+        <li><a href="#">Subscription</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Learn</div>
+      <ul class="footer-links">
+        <li><a href="#">Vedas & Scriptures</a></li>
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Kids Learning</a></li>
+        <li><a href="#">Astrology</a></li>
+        <li><a href="#">Wellness</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Admin Portal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Divyapath. Crafted with devotion. All rights reserved.</div>
+    <div class="footer-social">
+      <a class="social-btn" href="#">𝕏</a>
+      <a class="social-btn" href="#">in</a>
+      <a class="social-btn" href="#">▶</a>
+      <a class="social-btn" href="#">📷</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.feature-item').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.feature-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
